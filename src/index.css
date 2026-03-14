@@ -1,0 +1,249 @@
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html, body {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: transparent;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  padding-bottom: 10px;
+}
+
+/* Speech bubble */
+#speech-bubble {
+  display: none;
+  background: white;
+  border-radius: 12px;
+  padding: 10px 24px 10px 14px;  /* top, right (space for X btn), bottom, left */
+  margin-bottom: 8px;
+  font-family: Arial, sans-serif;
+  font-size: 12px;
+  text-align: center;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+  min-width: 160px;       /* minimum width */
+  max-width: 200px;       /* slightly wider than before */
+  min-height: 40px;       /* minimum height so X btn never overlaps */
+  width: max-content;     /* grows with content */
+  position: relative;
+  animation: popIn 0.3s ease, flashBubble 1s ease-in-out infinite, shakeBubble 0.5s ease-in-out infinite;
+}
+
+/* Little triangle at bottom of speech bubble */
+#speech-bubble::after {
+  content: '';
+  position: absolute;
+  bottom: -8px;
+  left: 50%;
+  transform: translateX(-50%);
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+  border-top: 8px solid white;
+  animation: flashTriangle 1s ease-in-out infinite;
+}
+
+/* Dismiss button */
+#dismiss-btn {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  width: 16px;
+  height: 16px;
+  background: #ff4444;
+  border: none;
+  cursor: pointer;
+  font-size: 11px;
+  color: white;
+  padding: 0;
+  line-height: 1;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#dismiss-btn:hover {
+  background: #cc0000;
+  color: #333;
+}
+
+/* Speech bubble triangle flashing animation */
+@keyframes flashTriangle {
+  0%, 100% { border-top-color: white; }
+  50%       { border-top-color: #FFE566; }
+}
+
+/* Speech bubble flashing animation */
+@keyframes flashBubble {
+  0%, 100% { 
+    background: white;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+  }
+  50% { 
+    background: #FFE566;
+    box-shadow: 0 2px 16px rgba(255,200,0,0.6);
+  }
+}
+
+/* Speech bubble shake animation */
+@keyframes shakeBubble {
+  0%, 100% { transform: translateX(0px) rotate(0deg); }
+  25%       { transform: translateX(-4px) rotate(-2deg); }
+  75%       { transform: translateX(4px) rotate(2deg); }
+}
+
+/* Pop in animation for speech bubble */
+@keyframes popIn {
+  0%   { transform: scale(0); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+/* Character container */
+#character {
+  width: 160px;
+  height: 135px;
+  cursor: pointer;
+  overflow: hidden;
+  position: relative;
+}
+
+/* Sprite — for idle cat */
+#sprite {
+  width: 640px;       /* one frame width */
+  height: 478px;      /* one frame height */
+  background-image: url('./assets/cat-idle.png');
+  background-size: 3840px 2868px;   /* full spritesheet size */
+  background-repeat: no-repeat;
+  background-position: 0 0;
+  transform-origin: top left;
+  transform: scale(0.25);  /* scale down to fit our window (180/640 = 0.2) */
+  transition: transform 0.3s ease;
+  animation: idleSprite 3.8s steps(1) infinite alternate; /*change animation speed, higher number means slower animation */
+}
+
+/* Idle spritesheet animation */
+@keyframes idleSprite {
+  0%    { background-position: 0 0; }
+  2.78% { background-position: -640px 0; }
+  5.56% { background-position: -1280px 0; }
+  8.33% { background-position: -1920px 0; }
+  11.11%{ background-position: -2560px 0; }
+  13.89%{ background-position: -3200px 0; }
+  16.67%{ background-position: 0 -478px; }
+  19.44%{ background-position: -640px -478px; }
+  22.22%{ background-position: -1280px -478px; }
+  25%   { background-position: -1920px -478px; }
+  27.78%{ background-position: -2560px -478px; }
+  30.56%{ background-position: -3200px -478px; }
+  33.33%{ background-position: 0 -956px; }
+  36.11%{ background-position: -640px -956px; }
+  38.89%{ background-position: -1280px -956px; }
+  41.67%{ background-position: -1920px -956px; }
+  44.44%{ background-position: -2560px -956px; }
+  47.22%{ background-position: -3200px -956px; }
+  50%   { background-position: 0 -1434px; }
+  52.78%{ background-position: -640px -1434px; }
+  55.56%{ background-position: -1280px -1434px; }
+  58.33%{ background-position: -1920px -1434px; }
+  61.11%{ background-position: -2560px -1434px; }
+  63.89%{ background-position: -3200px -1434px; }
+  66.67%{ background-position: 0 -1912px; }
+  69.44%{ background-position: -640px -1912px; }
+  72.22%{ background-position: -1280px -1912px; }
+  75%   { background-position: -1920px -1912px; }
+  77.78%{ background-position: -2560px -1912px; }
+  80.56%{ background-position: -3200px -1912px; }
+  83.33%{ background-position: 0 -2390px; }
+  86.11%{ background-position: -640px -2390px; }
+  88.89%{ background-position: -1280px -2390px; }
+  91.67%{ background-position: -1920px -2390px; }
+  94.44%{ background-position: -2560px -2390px; }
+  97.22%{ background-position: -3200px -2390px; }
+  100%  { background-position: 0 0; }
+}
+
+/* Excited sprite — overrides idle sprite when excited class is added */
+#character.excited #sprite {
+  width: 520px;
+  height: 478px;
+  background-image: url('./assets/excited-cat.png');
+  background-size: 4160px 3824px;
+  background-repeat: no-repeat;
+  transform-origin: top left;
+  transform: scale(0.30);
+  animation: excitedSprite 3.0s steps(1) infinite;
+}
+
+@keyframes excitedSprite {
+  0%    { background-position: 0 0; }
+  1.56% { background-position: -520px 0; }
+  3.13% { background-position: -1040px 0; }
+  4.69% { background-position: -1560px 0; }
+  6.25% { background-position: -2080px 0; }
+  7.81% { background-position: -2600px 0; }
+  9.38% { background-position: -3120px 0; }
+  10.94%{ background-position: -3640px 0; }
+  12.5% { background-position: 0 -478px; }
+  14.06%{ background-position: -520px -478px; }
+  15.63%{ background-position: -1040px -478px; }
+  17.19%{ background-position: -1560px -478px; }
+  18.75%{ background-position: -2080px -478px; }
+  20.31%{ background-position: -2600px -478px; }
+  21.88%{ background-position: -3120px -478px; }
+  23.44%{ background-position: -3640px -478px; }
+  25%   { background-position: 0 -956px; }
+  26.56%{ background-position: -520px -956px; }
+  28.13%{ background-position: -1040px -956px; }
+  29.69%{ background-position: -1560px -956px; }
+  31.25%{ background-position: -2080px -956px; }
+  32.81%{ background-position: -2600px -956px; }
+  34.38%{ background-position: -3120px -956px; }
+  35.94%{ background-position: -3640px -956px; }
+  37.5% { background-position: 0 -1434px; }
+  39.06%{ background-position: -520px -1434px; }
+  40.63%{ background-position: -1040px -1434px; }
+  42.19%{ background-position: -1560px -1434px; }
+  43.75%{ background-position: -2080px -1434px; }
+  45.31%{ background-position: -2600px -1434px; }
+  46.88%{ background-position: -3120px -1434px; }
+  48.44%{ background-position: -3640px -1434px; }
+  50%   { background-position: 0 -1912px; }
+  51.56%{ background-position: -520px -1912px; }
+  53.13%{ background-position: -1040px -1912px; }
+  54.69%{ background-position: -1560px -1912px; }
+  56.25%{ background-position: -2080px -1912px; }
+  57.81%{ background-position: -2600px -1912px; }
+  59.38%{ background-position: -3120px -1912px; }
+  60.94%{ background-position: -3640px -1912px; }
+  62.5% { background-position: 0 -2390px; }
+  64.06%{ background-position: -520px -2390px; }
+  65.63%{ background-position: -1040px -2390px; }
+  67.19%{ background-position: -1560px -2390px; }
+  68.75%{ background-position: -2080px -2390px; }
+  70.31%{ background-position: -2600px -2390px; }
+  71.88%{ background-position: -3120px -2390px; }
+  73.44%{ background-position: -3640px -2390px; }
+  75%   { background-position: 0 -2868px; }
+  76.56%{ background-position: -520px -2868px; }
+  78.13%{ background-position: -1040px -2868px; }
+  79.69%{ background-position: -1560px -2868px; }
+  81.25%{ background-position: -2080px -2868px; }
+  82.81%{ background-position: -2600px -2868px; }
+  84.38%{ background-position: -3120px -2868px; }
+  85.94%{ background-position: -3640px -2868px; }
+  87.5% { background-position: 0 -3346px; }
+  89.06%{ background-position: -520px -3346px; }
+  90.63%{ background-position: -1040px -3346px; }
+  92.19%{ background-position: -1560px -3346px; }
+  93.75%{ background-position: -2080px -3346px; }
+  95.31%{ background-position: -2600px -3346px; }
+  96.88%{ background-position: -3120px -3346px; }
+  98.44%{ background-position: -3640px -3346px; }
+  100%  { background-position: 0 0; }
+}
+
