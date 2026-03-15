@@ -2,7 +2,7 @@
 
 An animated cat companion that sits on your screen and reminds you of upcoming Google Calendar meetings
 
-![Desktop Friend](src/assets/cat-idle.png)
+![Desktop Friend](src/assets/the-result.png)
 
 ## Features
 - Animated cat character that lives on your desktop
