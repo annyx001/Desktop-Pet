@@ -52,7 +52,8 @@ const createWindow = () => {
     contextMenu.popup({ window: mainWindow });
   });
 
-  ipcMain.on('move-window', (event, { x, y }) => {
+  ipcMain.on('move-window', (event, { x, y }) => 
+{
   const win = BrowserWindow.getFocusedWindow();
   if (win) win.setPosition(Math.round(x), Math.round(y));
   });

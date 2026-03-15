@@ -21,7 +21,7 @@ window.electronAPI.onShowReminder((meeting) =>
   showReminder(meeting);
 });
 
-// Show reminder
+// **SHOW-REMINDER**
 function showReminder(meeting)
 {
   // Update the speech bubble text
@@ -59,6 +59,7 @@ function showReminder(meeting)
   }, 30000);
 }
 
+// **DRAGGING LOGICS**
 // Make the character draggable around the screen
 let isDragging = false;
 let dragStartX = 0;
@@ -66,7 +67,8 @@ let dragStartY = 0;
 let windowStartX = 0;
 let windowStartY = 0;
 
-character.addEventListener('mousedown', (e) => {
+character.addEventListener('mousedown', (e) => 
+{
   isDragging = true;
   
   // Record where the mouse was when we started dragging
@@ -102,11 +104,8 @@ document.addEventListener('mouseup', () =>
   character.style.cursor = 'pointer';
 });
 
-speechBubbleDismissBtn.addEventListener('click', () =>
-{
-  dismissReminder();
-})
 
+// **DISMISS-REMINDER**
 function dismissReminder() 
 {
   // Hide speech bubble
@@ -129,3 +128,9 @@ function dismissReminder()
     bubbleTimer = null;
   }
 }
+
+// Event listener for dismiss button clicked
+speechBubbleDismissBtn.addEventListener('click', () =>
+{
+  dismissReminder();
+})
