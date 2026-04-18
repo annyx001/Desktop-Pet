@@ -1,27 +1,29 @@
+/* Rest all default browser styles- browsers add margins/padding by default, this removes them */
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
+/* Make html and body fill the entire window */
 html, body {
   width: 100%;
   height: 100%;
-  overflow: hidden;
-  background: transparent;
+  overflow: hidden;         /*hide scrollbars */
+  background: transparent;  
 }
 
 body {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-end;
+  flex-direction: column;     /* stack children vertically (speech bubble on top, cat below) */
+  align-items: center;        /* center everything horizontally */
+  justify-content: flex-end;  /* push everything to the BOTTOM of the window */
   padding-bottom: 10px;
 }
 
 /* Speech bubble */
 #speech-bubble {
-  display: none;
+  display: none;                  /* hidden by default — only shows during reminders */
   background: white;
-  border-radius: 12px;
-  padding: 10px 24px 10px 14px;  /* top, right (space for X btn), bottom, left */
-  margin-bottom: 8px;
+  border-radius: 12px;            /* rounded corners */
+  padding: 10px 24px 10px 14px;   /* top, right (space for X btn), bottom, left */
+  margin-bottom: 8px;             /* gap between bubble and cat */
   font-family: Arial, sans-serif;
   font-size: 12px;
   text-align: center;
@@ -52,12 +54,12 @@ body {
   position: absolute;
   top: 4px;
   right: 4px;
-  width: 16px;
-  height: 16px;
+  width: 16px;                /* button size */
+  height: 16px;               /* button size */
   background: #ff4444;
   border: none;
-  cursor: pointer;
-  font-size: 11px;
+  cursor: pointer;            /* show hand cursor on hover */
+  font-size: 11px;             /* size of the ✕ symbol */
   color: white;
   padding: 0;
   line-height: 1;
@@ -67,6 +69,7 @@ body {
   justify-content: center;
 }
 
+/* When mouse hovers over the X button */
 #dismiss-btn:hover {
   background: #cc0000;
   color: #333;
@@ -90,6 +93,8 @@ body {
   }
 }
 
+
+/* ─── ANIMATIONS ─────────────────────────────────────────────── */
 /* Speech bubble shake animation */
 @keyframes shakeBubble {
   0%, 100% { transform: translateX(0px) rotate(0deg); }
@@ -103,80 +108,45 @@ body {
   100% { transform: scale(1); opacity: 1; }
 }
 
-/* Character container */
-#character {
-  width: 160px;
-  height: 135px;
-  cursor: pointer;
-  overflow: hidden;
-  position: relative;
-}
-
-/* Sprite — for idle cat */
-#sprite {
-  width: 640px;       /* one frame width */
-  height: 478px;      /* one frame height */
-  background-image: url('./assets/cat-idle.png');
-  background-size: 3840px 2868px;   /* full spritesheet size */
-  background-repeat: no-repeat;
-  background-position: 0 0;
-  transform-origin: top left;
-  transform: scale(0.25);  /* scale down to fit our window (180/640 = 0.2) */
-  transition: transform 0.3s ease;
-  animation: idleSprite 3.8s steps(1) infinite alternate; /*change animation speed, higher number means slower animation */
-}
-
-/* Idle spritesheet animation */
+/* Idle spritesheet animation (6x6) */
 @keyframes idleSprite {
-  0%    { background-position: 0 0; }
-  2.78% { background-position: -640px 0; }
-  5.56% { background-position: -1280px 0; }
-  8.33% { background-position: -1920px 0; }
-  11.11%{ background-position: -2560px 0; }
-  13.89%{ background-position: -3200px 0; }
-  16.67%{ background-position: 0 -478px; }
+  0%    { background-position: 0 0; }            /* frame 1: col 1, row 1 */
+  2.78% { background-position: -640px 0; }       /* frame 2: col 2, row 1 */
+  5.56% { background-position: -1280px 0; }      /* frame 3: col 3, row 1 */
+  8.33% { background-position: -1920px 0; }      /* frame 4: col 4, row 1 */
+  11.11%{ background-position: -2560px 0; }      /* frame 5: col 5, row 1 */
+  13.89%{ background-position: -3200px 0; }      /* frame 6: col 6, row 1 */
+  16.67%{ background-position: 0 -478px; }       /* frame 7: col 1, row 2 */
   19.44%{ background-position: -640px -478px; }
   22.22%{ background-position: -1280px -478px; }
   25%   { background-position: -1920px -478px; }
   27.78%{ background-position: -2560px -478px; }
   30.56%{ background-position: -3200px -478px; }
-  33.33%{ background-position: 0 -956px; }
+  33.33%{ background-position: 0 -956px; }       /* frame 13: col 1, row 3 */
   36.11%{ background-position: -640px -956px; }
   38.89%{ background-position: -1280px -956px; }
   41.67%{ background-position: -1920px -956px; }
   44.44%{ background-position: -2560px -956px; }
   47.22%{ background-position: -3200px -956px; }
-  50%   { background-position: 0 -1434px; }
+  50%   { background-position: 0 -1434px; }      /* frame 19: col 1, row 4 */
   52.78%{ background-position: -640px -1434px; }
   55.56%{ background-position: -1280px -1434px; }
   58.33%{ background-position: -1920px -1434px; }
   61.11%{ background-position: -2560px -1434px; }
   63.89%{ background-position: -3200px -1434px; }
-  66.67%{ background-position: 0 -1912px; }
+  66.67%{ background-position: 0 -1912px; }       /* frame 25: col 1, row 5 */
   69.44%{ background-position: -640px -1912px; }
   72.22%{ background-position: -1280px -1912px; }
   75%   { background-position: -1920px -1912px; }
   77.78%{ background-position: -2560px -1912px; }
   80.56%{ background-position: -3200px -1912px; }
-  83.33%{ background-position: 0 -2390px; }
+  83.33%{ background-position: 0 -2390px; }       /* frame 31: col 1, row 6 */
   86.11%{ background-position: -640px -2390px; }
   88.89%{ background-position: -1280px -2390px; }
   91.67%{ background-position: -1920px -2390px; }
   94.44%{ background-position: -2560px -2390px; }
   97.22%{ background-position: -3200px -2390px; }
-  100%  { background-position: 0 0; }
-}
-
-/* Excited sprite — overrides idle sprite when excited class is added */
-#character.excited #sprite {
-  width: 520px;
-  height: 478px;
-  background-image: url('./assets/excited-cat.png');
-  background-size: 4160px 3824px;
-  background-repeat: no-repeat;
-  transform-origin: top left;
-  transform: scale(0.30);
-  animation: excitedSprite 3.0s steps(1) infinite;
+  100%  { background-position: 0 0; }             /* back to frame 1 */
 }
 
 @keyframes excitedSprite {
@@ -246,4 +216,43 @@ body {
   98.44%{ background-position: -3640px -3346px; }
   100%  { background-position: 0 0; }
 }
+/* ─── ANIMATIONS ─────────────────────────────────────────────── */
+
+
+/* Character 'cat' container */
+#character {
+  width: 160px;         /* how wide the character appears on screen */
+  height: 135px;        /* how tall the character appears on screen */
+  cursor: pointer;      /* show hand cursor — tells user it's clickable */
+  overflow: hidden;     /* clips the sprite so only one frame is shown */
+  position: relative;
+}
+
+/* Sprite - for idle cat */
+#sprite {
+  width: 640px;       /* one frame width - not the full spritesheet*/
+  height: 478px;      /* one frame height - not the full spritesheet */
+  background-image: url('../assets/cat-idle.png');
+  background-size: 3840px 2868px;   /* full spritesheet size */
+  background-repeat: no-repeat;
+  background-position: 0 0;
+  transform-origin: top left;
+  transform: scale(0.25);  /* scale down to fit our window */
+  transition: transform 0.3s ease;
+  animation: idleSprite 3.8s steps(1) infinite alternate; /*change animation speed, higher number means slower animation */
+}
+
+/* Excited sprite - overrides idle sprite when excited class is added */
+#character.excited #sprite {
+  width: 520px;
+  height: 478px;
+  background-image: url('../assets/excited-cat.png');
+  background-size: 4160px 3824px;
+  background-repeat: no-repeat;
+  transform-origin: top left;
+  transform: scale(0.30);
+  animation: excitedSprite 3.0s steps(1) infinite;
+}
+
+
 

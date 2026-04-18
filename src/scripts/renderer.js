@@ -1,4 +1,4 @@
-require('./index.css');
+require('../css/index.css');
 
 // Get references to our HTML elements
 const character = document.getElementById('character');
@@ -8,8 +8,8 @@ const speechBubbleDismissBtn = document.getElementById('dismiss-btn');
 const bubbleText = document.getElementById('bubble-text');
 
 // Sound
-const alarmSound = new Audio(require('./assets/alarm-sound.mp3'));
-const catSound = new Audio(require('./assets/cat-meow.mp3'));
+const alarmSound = new Audio(require('../assets/alarm-sound.mp3'));
+const catSound = new Audio(require('../assets/cat-meow.mp3'));
 let soundInterval = null;
 
 // Keep track of the timer that hides the bubble

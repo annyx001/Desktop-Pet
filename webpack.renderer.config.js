@@ -6,8 +6,17 @@ rules.push({
 });
 
 module.exports = {
-  // Put your normal webpack config below here
   module: {
     rules,
   },
+  resolve: {
+    fallback: {
+      path: false,
+      fs: false,
+      crypto: false,
+      os: false,
+      util: false,
+      assert: false,
+    }
+  }
 };
