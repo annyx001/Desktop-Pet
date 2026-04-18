@@ -4,6 +4,12 @@ const { FuseV1Options, FuseVersion } = require('@electron/fuses');
 module.exports = {
   packagerConfig: {
     asar: true,
+    extraResources:[
+      {
+        from: 'src/credentials.json',
+        to: 'credentials.json'
+      }
+    ]
   },
   rebuildConfig: {},
   makers: [

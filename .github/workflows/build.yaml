@@ -20,6 +20,9 @@ jobs:
       - name: Install dependencies
         run: npm install
 
+      - name: Write Google credentials
+        run: echo '${{ secrets.GOOGLE_CREDENTIALS }}' > src/credentials.json
+
       - name: Build Windows app
         run: npm run make -- --platform=win32
 
@@ -43,6 +46,9 @@ jobs:
 
       - name: Install dependencies
         run: npm install
+
+      - name: Write Google credentials
+        run: echo '${{ secrets.GOOGLE_CREDENTIALS }}' > src/credentials.json
 
       - name: Build Mac app
         run: npm run make -- --platform=darwin

@@ -4,8 +4,8 @@ const path = require('path');
 const { app } = require('electron')
 
 //Path to the credentials file
-const CREDENTIALS_PATH = path.join(app.getAppPath(), 'src', 'credentials.json'); //app.getAppPath() always point to the actual project root regardless of where the compiled code lives
-const TOKEN_PATH = path.join(app.getAppPath(), 'src', 'token.json')
+const CREDENTIALS_PATH = path.join(process.resourcesPath, 'credentials.json');
+const TOKEN_PATH = path.join(app.getPath('userData'), 'token.json');
 
 // The scope defines what we're allowed to access
 // This one is READ ONLY - we can see events but cannot modify them
