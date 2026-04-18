@@ -64,6 +64,10 @@ const createWindow = () => {
 // Some APIs can only be used after this event occurs.
 app.whenReady().then(() => 
 {
+
+  // Auto-start when computer logs in
+  app.setLoginItemSettings({openAtLogin: true,});
+
   createWindow();
 
   // Start checking for upcoming meetings every 5 minutes

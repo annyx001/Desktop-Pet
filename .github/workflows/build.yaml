@@ -1,0 +1,54 @@
+name: Build App
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  build-windows:
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 20
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build Windows app
+        run: npm run make -- --platform=win32
+
+      - name: Upload Windows build
+        uses: actions/upload-artifact@v3
+        with:
+          name: windows-build
+          path: out/make/**/*.exe
+
+  build-mac:
+    runs-on: macos-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 20
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build Mac app
+        run: npm run make -- --platform=darwin
+
+      - name: Upload Mac build
+        uses: actions/upload-artifact@v3
+        with:
+          name: mac-build
+          path: out/make/**/*.dmg
