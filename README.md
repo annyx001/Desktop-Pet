@@ -1,6 +1,11 @@
 # Desktop Pet 
 
 An animated cat companion that sits on your screen and reminds you of upcoming Google Calendar meetings
+**Note**
+This app is currently in development and has **not been published** yet.
+Because of this:
+- Only users explicitly added by me can use the Google Calendar integration
+- If you haven't been added as an authorized user, the app will not be able to connect to your Google Calendar
 
 ![Desktop Friend](src/assets/the-result.png)
 
