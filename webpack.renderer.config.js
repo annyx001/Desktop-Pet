@@ -10,4 +10,8 @@ module.exports = {
   module: {
     rules,
   },
+    node: {
+    __dirname: true,
+    __filename: true,
+  },
 };

@@ -40,6 +40,9 @@ const createWindow = () => {
   // and load the index.html of the app.
   mainWindow.loadURL(MAIN_WINDOW_WEBPACK_ENTRY);
 
+  //For debugging
+  //mainWindow.webContents.openDevTools(); 
+
   // Right-click context menu with the Quit option
   const contextMenu = Menu.buildFromTemplate([
     {

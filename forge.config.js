@@ -38,24 +38,32 @@ module.exports = {
       config: {},
     },
     {
-      name: '@electron-forge/plugin-webpack',
-      config: {
-        mainConfig: './webpack.main.config.js',
-        renderer: {
-          config: './webpack.renderer.config.js',
-          entryPoints: [
-            {
-              html: './src/index.html',
-              js: './src/renderer.js',
-              name: 'main_window',
-              preload: {
-                js: './src/preload.js',
+  name: '@electron-forge/plugin-webpack',
+  config: {
+    mainConfig: './webpack.main.config.js',
+    renderer: {
+      config: './webpack.renderer.config.js',
+      nodeIntegration: false,
+      entryPoints: [
+        {
+          html: './src/index.html',
+          js: './src/renderer.js',
+          name: 'main_window',
+          preload: {
+            js: './src/preload.js',
+            config: {
+              node: {
+                __dirname: true,
+                __filename: true,
               },
             },
-          ],
+          },
         },
-      },
+      ],
     },
+    devContentSecurityPolicy: "default-src 'self' 'unsafe-inline' 'unsafe-eval' data:",
+  },
+},
     // Fuses are used to enable/disable various Electron functionality
     // at package time, before code signing the application
     new FusesPlugin({

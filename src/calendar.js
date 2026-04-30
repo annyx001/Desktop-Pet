@@ -4,7 +4,7 @@ const path = require('path');
 const { app } = require('electron')
 
 //Path to the credentials file
-const CREDENTIALS_PATH = path.join(process.resourcesPath, 'credentials.json');
+const CREDENTIALS_PATH = app.isPackaged ? path.join(process.resourcesPath, 'credentials.json') : path.join(__dirname, '..', '..', 'credentials.json');
 const TOKEN_PATH = path.join(app.getPath('userData'), 'token.json');
 
 // The scope defines what we're allowed to access
